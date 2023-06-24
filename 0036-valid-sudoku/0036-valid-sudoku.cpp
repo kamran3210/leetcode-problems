@@ -1,9 +1,3 @@
-std::ostream& operator<< (std::ostream& os, std::unordered_set<char> const& s) {
-    for (char i : s)
-        os << i << ' ';
-    return os << "\n";
-}
-
 class Solution {
 public:
     bool isValidSudoku(vector<vector<char>>& board) {
@@ -32,7 +26,6 @@ private:
     bool isValidCol(int col, vector<vector<char>>& board) {
         bool set[9];
         memset(set, false, sizeof(set));
-
         for (int i = 0; i < 9; i++) {
             char c = board[i][col];
             if (!isUnique(c, set)) return false;
@@ -43,7 +36,6 @@ private:
     bool isValidBox(int box, vector<vector<char>>& board) {
         bool set[9];
         memset(set, false, sizeof(set));
-
         int x = (box % 3) * 3;
         int y = (box / 3) * 3;
         for (int i = 0; i < 3; i++) {
@@ -54,6 +46,4 @@ private:
         }
         return true;
     }
-
-    
 };
