@@ -14,14 +14,15 @@ public:
         return true;
     }
 private:
-    bool isUnique(char c, unordered_set<char>& set) {
+    bool isUnique(char c, bool set[]) {
         if (c == '.') return true;
-        auto p = set.insert(c);
-        return p.second;
+        if (set[c - '1']) return false;
+        return set[c - '1'] = true;
     }
 
     bool isValidRow(int row, vector<vector<char>>& board) {
-        unordered_set<char> set;
+        bool set[9];
+        memset(set, false, sizeof(set));
         for (auto const& c : board[row]) {
             if (!isUnique(c, set)) return false;
         }
@@ -29,7 +30,9 @@ private:
     }
 
     bool isValidCol(int col, vector<vector<char>>& board) {
-        unordered_set<char> set;
+        bool set[9];
+        memset(set, false, sizeof(set));
+
         for (int i = 0; i < 9; i++) {
             char c = board[i][col];
             if (!isUnique(c, set)) return false;
@@ -38,7 +41,9 @@ private:
     }
 
     bool isValidBox(int box, vector<vector<char>>& board) {
-        unordered_set<char> set;
+        bool set[9];
+        memset(set, false, sizeof(set));
+
         int x = (box % 3) * 3;
         int y = (box / 3) * 3;
         for (int i = 0; i < 3; i++) {
