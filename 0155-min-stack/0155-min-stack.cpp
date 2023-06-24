@@ -6,7 +6,7 @@ public:
     
     void push(int val) {
         st.push(val);
-        if(mins.size() == 0 || val <= mins.top()) mins.push(val);
+        if(mins.empty() || val <= mins.top()) mins.push(val);
     }
     
     void pop() {
