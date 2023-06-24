@@ -1,34 +1,38 @@
 class Solution {
 public:
     int evalRPN(vector<string>& tokens) {
-        stack<string> st;
+        stack<int> st;
         for (string& token : tokens) {
             if (token == "+") {
-                auto p = pop2(st);
-                st.push(to_string(p.first + p.second));
+                int s2 = st.top();
+                st.pop();
+                int s1 = st.top();
+                st.pop();
+                st.push(s1 + s2);
             } else if (token == "-") {
-                auto p = pop2(st);
-                st.push(to_string(p.first - p.second));
+                int s2 = st.top();
+                st.pop();
+                int s1 = st.top();
+                st.pop();
+                st.push(s1 - s2);
             } else if (token == "*") {
-                auto p = pop2(st);
-                st.push(to_string(p.first * p.second));
+                int s2 = st.top();
+                st.pop();
+                int s1 = st.top();
+                st.pop();
+                st.push(s1 * s2);
             } else if (token == "/") {
-                auto p = pop2(st);
-                st.push(to_string(p.first / p.second));
+                int s2 = st.top();
+                st.pop();
+                int s1 = st.top();
+                st.pop();
+                st.push(s1 / s2);
             } else {
-                st.push(token);
+                st.push(stoi(token));
             }
             // cout << token << ": " << st.top() << "\n";
         }
         // cout << "\n";
-        return stoi(st.top());
-    }
-private:
-    pair<int, int> pop2(stack<string>& st) {
-        string s2 = st.top();
-        st.pop();
-        string s1 = st.top();
-        st.pop();
-        return pair(stoi(s1), stoi(s2));
+        return st.top();
     }
 };
